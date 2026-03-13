@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:agora_rtc_engine_example/components/android_foreground_service_widget.dart';
 import 'package:agora_rtc_engine_example/components/config_override.dart';
+import 'package:agora_rtc_engine_example/test.dart';
+import 'package:agora_rtc_engine_example/test_new.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,10 +15,10 @@ import 'config/agora.config.dart' as config;
 import 'components/log_sink.dart';
 
 void main() {
-  FlutterError.onError = (details) {
-    FlutterError.presentError(details);
-    logSink.log(details.toString());
-  };
+  // FlutterError.onError = (details) {
+  //   FlutterError.presentError(details);
+  //   logSink.log(details.toString());
+  // };
 
   // TODO(littlegnal): The newer version of Flutter SDK doc shows use of the
   // `PlatformDispatcher.instance.onError` but not `runZonedGuarded` to
@@ -24,11 +26,12 @@ void main() {
   // see: https://docs.flutter.dev/testing/errors#handling-all-types-of-errors,
   // follow the Flutter SDK doc after we can bump the mini supported Flutter SDK (currently 2.10.x)
   // to the newer version of Flutter SDK.
-  runZonedGuarded(() {
-    runApp(const MyApp());
-  }, (error, stackTrace) {
-    logSink.log(error.toString());
-  });
+  runApp(const MyTestNewApp());
+  // runZonedGuarded(() {
+  //   runApp(const MyTestApp());
+  // }, (error, stackTrace) {
+  //   logSink.log(error.toString());
+  // });
 }
 
 /// This widget is the root of your application.
@@ -48,9 +51,14 @@ class _MyAppState extends State<MyApp> {
   bool _isWebSetup = false;
 
   bool _isConfigInvalid() {
-    return config.appId == '<YOUR_APP_ID>' ||
-        config.token == '<YOUR_TOKEN>' ||
-        config.channelId == '<YOUR_CHANNEL_ID>';
+    return config.appId == 'e97e65b01c8d40d59f6a07a004513103' ||
+        config.token ==
+            '007eJxTYFgvHbH8o9Xf7G75CO/XvcfUe9cY33H0XtDOY2TZ9Iap+48CQ6qleaqZaZKBYbJFiolBiqllmlmigXmigYGJqaGxoYFx2MbNmQ2BjAxPOB8xMEIhiM/CUJJaXMLAAAA72h85' ||
+        config.channelId == 'test';
+
+    // appId: "e7f6e9aeecf14b2ba10e3f40be9f56e7",
+    // channelName: "007eJxTYFgvHbH8o9Xf7G75CO/XvcfUe9cY33H0XtDOY2TZ9Iap+48CQ6qleaqZaZKBYbJFiolBiqllmlmigXmigYGJqaGxoYFx2MbNmQ2BjAxPOB8xMEIhiM/CUJJaXMLAAAA72h85",
+    // tempToken: test,
   }
 
   @override
