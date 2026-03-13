@@ -138,6 +138,32 @@ class _MainScreenScreenState extends State<MainScreen> {
               ),
             ),
           ),
+
+          // buttons
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: SizedBox(
+              height: 150,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: () async {
+                        await _engine.leaveChannel();
+                      },
+                      child: Icon(Icons.delete)),
+                  const SizedBox(
+                    width: 11,
+                  ),
+                  ElevatedButton(
+                      onPressed: () async {
+                        await _joinChannel();
+                      },
+                      child: Icon(Icons.phone))
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
