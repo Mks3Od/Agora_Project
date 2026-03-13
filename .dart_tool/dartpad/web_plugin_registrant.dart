@@ -8,11 +8,13 @@
 
 import 'package:agora_rtc_engine/agora_rtc_engine_web.dart';
 import 'package:iris_method_channel/iris_method_channel_web.dart';
+import 'package:permission_handler_html/permission_handler_html.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 void registerPlugins([final Registrar? pluginRegistrar]) {
   final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
   AgoraRtcEngineWeb.registerWith(registrar);
   IrisMethodChannelWeb.registerWith(registrar);
+  WebPermissionHandler.registerWith(registrar);
   registrar.registerMessageHandler();
 }
