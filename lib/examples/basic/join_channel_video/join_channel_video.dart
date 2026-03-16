@@ -58,6 +58,9 @@ class _State extends State<JoinChannelVideo> {
     await _engine.initialize(RtcEngineContext(
       appId: config.appId,
     ));
+    debugPrint(
+        "🧧🧧 appId- ${config.appId}, ${config.channelId}, ${config.screenSharingUid}, ${config.stringUid}, ${config.token}, ${config.uid}");
+
     _rtcEngineEventHandler = RtcEngineEventHandler(
       onError: (ErrorCodeType err, String msg) {
         logSink.log('[onError] err: $err, msg: $msg');

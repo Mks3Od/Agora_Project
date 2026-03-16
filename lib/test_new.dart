@@ -159,7 +159,7 @@ class _MainScreenScreenState extends State<MainScreen> {
                       onPressed: () async {
                         await _joinChannel();
                       },
-                      child: Icon(Icons.phone))
+                      child: Icon(Icons.phone)),
                 ],
               ),
             ),
