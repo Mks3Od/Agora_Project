@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=C:\Users\Manish\develop\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\Manish\develop\projects\agora_rtc_engine-6.5.2\example"
+export "FLUTTER_APPLICATION_PATH=C:\Users\Manish\develop\projects\Agora_Project"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"

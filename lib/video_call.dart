@@ -10,8 +10,8 @@ const token =
 const channel = "test";
 
 // Main App Widget
-class MyTestNewApp extends StatelessWidget {
-  const MyTestNewApp({Key? key}) : super(key: key);
+class VideoCall extends StatelessWidget {
+  const VideoCall({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +33,7 @@ class _MainScreenScreenState extends State<MainScreen> {
   int? _remoteUid; // Stores remote user ID
   bool _localUserJoined =
       false; // Indicates if local user has joined the channel
+  bool _localPreviewReady = false; // Indicates if local video preview is ready
   late RtcEngine _engine; // Stores Agora RTC Engine instance
 
   @override
@@ -46,6 +47,7 @@ class _MainScreenScreenState extends State<MainScreen> {
     await _requestPermissions();
     await _initializeAgoraVideoSDK();
     await _setupLocalVideo();
+    setState(() => _localPreviewReady = true);
     _setupEventHandlers();
     await _joinChannel();
   }
@@ -87,6 +89,17 @@ class _MainScreenScreenState extends State<MainScreen> {
           debugPrint("Remote user $remoteUid left");
           setState(() => _remoteUid = null);
         },
+        onError: (ErrorCodeType err, String msg) {
+          debugPrint("Agora Error: $err, $msg");
+        },
+        onConnectionStateChanged: (RtcConnection connection,
+            ConnectionStateType state, ConnectionChangedReasonType reason) {
+          debugPrint(
+              "Connection state changed: ${state.name}, reason: ${reason.name}");
+        },
+        onTokenPrivilegeWillExpire: (RtcConnection connection, String token) {
+          debugPrint("Token will expire");
+        },
       ),
     );
   }
@@ -122,7 +135,11 @@ class _MainScreenScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Agora Video Calling')),
+      appBar: AppBar(
+        title: Text(_localUserJoined
+            ? 'Agora Video Calling'
+            : 'Agora Video Calling...'),
+      ),
       body: Stack(
         children: [
           Center(child: _remoteVideo()),
@@ -132,7 +149,7 @@ class _MainScreenScreenState extends State<MainScreen> {
               width: 100,
               height: 150,
               child: Center(
-                child: _localUserJoined
+                child: _localPreviewReady
                     ? _localVideo()
                     : const CircularProgressIndicator(),
               ),

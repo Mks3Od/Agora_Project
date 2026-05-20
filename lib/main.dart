@@ -4,7 +4,8 @@ import 'dart:io';
 import 'package:agora_rtc_engine_example/components/android_foreground_service_widget.dart';
 import 'package:agora_rtc_engine_example/components/config_override.dart';
 import 'package:agora_rtc_engine_example/test.dart';
-import 'package:agora_rtc_engine_example/test_new.dart';
+import 'package:agora_rtc_engine_example/video_call.dart';
+import 'package:agora_rtc_engine_example/testnew.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -26,7 +27,7 @@ void main() {
   // see: https://docs.flutter.dev/testing/errors#handling-all-types-of-errors,
   // follow the Flutter SDK doc after we can bump the mini supported Flutter SDK (currently 2.10.x)
   // to the newer version of Flutter SDK.
-  runApp(const MyTestNewApp());
+  runApp(const VideoCall());
   // runZonedGuarded(() {
   //   runApp(const MyTestApp());
   // }, (error, stackTrace) {
@@ -34,243 +35,243 @@ void main() {
   // });
 }
 
-/// This widget is the root of your application.
-class MyApp extends StatefulWidget {
-  /// Construct the [MyApp]
-  const MyApp({Key? key}) : super(key: key);
+// /// This widget is the root of your application.
+// class MyApp extends StatefulWidget {
+//   /// Construct the [MyApp]
+//   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
 
-class _MyAppState extends State<MyApp> {
-  final _data = [...basic, ...advanced];
+// class _MyAppState extends State<MyApp> {
+//   final _data = [...basic, ...advanced];
 
-  bool _showPerformanceOverlay = false;
+//   bool _showPerformanceOverlay = false;
 
-  bool _isWebSetup = false;
+//   bool _isWebSetup = false;
 
-  bool _isConfigInvalid() {
-    return config.appId == 'e97e65b01c8d40d59f6a07a004513103' ||
-        config.token ==
-            '007eJxTYFgvHbH8o9Xf7G75CO/XvcfUe9cY33H0XtDOY2TZ9Iap+48CQ6qleaqZaZKBYbJFiolBiqllmlmigXmigYGJqaGxoYFx2MbNmQ2BjAxPOB8xMEIhiM/CUJJaXMLAAAA72h85' ||
-        config.channelId == 'test';
+//   bool _isConfigInvalid() {
+//     return config.appId == 'e97e65b01c8d40d59f6a07a004513103' ||
+//         config.token ==
+//             '007eJxTYFgvHbH8o9Xf7G75CO/XvcfUe9cY33H0XtDOY2TZ9Iap+48CQ6qleaqZaZKBYbJFiolBiqllmlmigXmigYGJqaGxoYFx2MbNmQ2BjAxPOB8xMEIhiM/CUJJaXMLAAAA72h85' ||
+//         config.channelId == 'test';
 
-    // appId: "e7f6e9aeecf14b2ba10e3f40be9f56e7",
-    // channelName: "007eJxTYFgvHbH8o9Xf7G75CO/XvcfUe9cY33H0XtDOY2TZ9Iap+48CQ6qleaqZaZKBYbJFiolBiqllmlmigXmigYGJqaGxoYFx2MbNmQ2BjAxPOB8xMEIhiM/CUJJaXMLAAAA72h85",
-    // tempToken: test,
-  }
+//     // appId: "e7f6e9aeecf14b2ba10e3f40be9f56e7",
+//     // channelName: "007eJxTYFgvHbH8o9Xf7G75CO/XvcfUe9cY33H0XtDOY2TZ9Iap+48CQ6qleaqZaZKBYbJFiolBiqllmlmigXmigYGJqaGxoYFx2MbNmQ2BjAxPOB8xMEIhiM/CUJJaXMLAAAA72h85",
+//     // tempToken: test,
+//   }
 
-  @override
-  void initState() {
-    super.initState();
+//   @override
+//   void initState() {
+//     super.initState();
 
-    _isWebSetup = !kIsWeb;
+//     _isWebSetup = !kIsWeb;
 
-    _requestPermissionIfNeed();
-  }
+//     _requestPermissionIfNeed();
+//   }
 
-  Future<void> _requestPermissionIfNeed() async {
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      await [Permission.audio, Permission.microphone, Permission.camera]
-          .request();
-    }
-  }
+//   Future<void> _requestPermissionIfNeed() async {
+//     if (defaultTargetPlatform == TargetPlatform.android) {
+//       await [Permission.audio, Permission.microphone, Permission.camera]
+//           .request();
+//     }
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      showPerformanceOverlay: _showPerformanceOverlay,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('APIExample'),
-          actions: [
-            ToggleButtons(
-              color: Colors.grey[300],
-              selectedColor: Colors.white,
-              renderBorder: false,
-              children: const [
-                Icon(
-                  Icons.data_thresholding_outlined,
-                )
-              ],
-              isSelected: [_showPerformanceOverlay],
-              onPressed: (index) {
-                setState(() {
-                  _showPerformanceOverlay = !_showPerformanceOverlay;
-                });
-              },
-            )
-          ],
-        ),
-        body: _body(),
-      ),
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       showPerformanceOverlay: _showPerformanceOverlay,
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('APIExample'),
+//           actions: [
+//             ToggleButtons(
+//               color: Colors.grey[300],
+//               selectedColor: Colors.white,
+//               renderBorder: false,
+//               children: const [
+//                 Icon(
+//                   Icons.data_thresholding_outlined,
+//                 )
+//               ],
+//               isSelected: [_showPerformanceOverlay],
+//               onPressed: (index) {
+//                 setState(() {
+//                   _showPerformanceOverlay = !_showPerformanceOverlay;
+//                 });
+//               },
+//             )
+//           ],
+//         ),
+//         body: _body(),
+//       ),
+//     );
+//   }
 
-  Widget _body() {
-    if (!_isWebSetup) {
-      return _WebSetupPage(setupCompleted: () {
-        setState(() {
-          _isWebSetup = true;
-        });
-      });
-    }
+//   Widget _body() {
+//     if (!_isWebSetup) {
+//       return _WebSetupPage(setupCompleted: () {
+//         setState(() {
+//           _isWebSetup = true;
+//         });
+//       });
+//     }
 
-    if (_isConfigInvalid()) {
-      return const InvalidConfigWidget();
-    }
+//     if (_isConfigInvalid()) {
+//       return const InvalidConfigWidget();
+//     }
 
-    return ListView.builder(
-      itemCount: _data.length,
-      itemBuilder: (context, index) {
-        return _data[index]['widget'] == null
-            ? Ink(
-                color: Colors.grey,
-                child: ListTile(
-                  title: Text(_data[index]['name'] as String,
-                      style:
-                          const TextStyle(fontSize: 24, color: Colors.white)),
-                ),
-              )
-            : ListTile(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    Widget widget = Scaffold(
-                      appBar: AppBar(
-                        title: Text(_data[index]['name'] as String),
-                        // ignore: prefer_const_literals_to_create_immutables
-                        actions: [const LogActionWidget()],
-                      ),
-                      body: _data[index]['widget'] as Widget?,
-                    );
+//     return ListView.builder(
+//       itemCount: _data.length,
+//       itemBuilder: (context, index) {
+//         return _data[index]['widget'] == null
+//             ? Ink(
+//                 color: Colors.grey,
+//                 child: ListTile(
+//                   title: Text(_data[index]['name'] as String,
+//                       style:
+//                           const TextStyle(fontSize: 24, color: Colors.white)),
+//                 ),
+//               )
+//             : ListTile(
+//                 onTap: () {
+//                   Navigator.push(context, MaterialPageRoute(builder: (context) {
+//                     Widget widget = Scaffold(
+//                       appBar: AppBar(
+//                         title: Text(_data[index]['name'] as String),
+//                         // ignore: prefer_const_literals_to_create_immutables
+//                         actions: [const LogActionWidget()],
+//                       ),
+//                       body: _data[index]['widget'] as Widget?,
+//                     );
 
-                    if (!kIsWeb && Platform.isAndroid) {
-                      widget = AndroidForegroundServiceWidget(child: widget);
-                    }
+//                     if (!kIsWeb && Platform.isAndroid) {
+//                       widget = AndroidForegroundServiceWidget(child: widget);
+//                     }
 
-                    return widget;
-                  }));
-                },
-                title: Text(
-                  _data[index]['name'] as String,
-                  style: const TextStyle(fontSize: 24, color: Colors.black),
-                ),
-              );
-      },
-    );
-  }
-}
+//                     return widget;
+//                   }));
+//                 },
+//                 title: Text(
+//                   _data[index]['name'] as String,
+//                   style: const TextStyle(fontSize: 24, color: Colors.black),
+//                 ),
+//               );
+//       },
+//     );
+//   }
+// }
 
-class _WebSetupPage extends StatefulWidget {
-  const _WebSetupPage({Key? key, required this.setupCompleted})
-      : super(key: key);
+// class _WebSetupPage extends StatefulWidget {
+//   const _WebSetupPage({Key? key, required this.setupCompleted})
+//       : super(key: key);
 
-  final VoidCallback setupCompleted;
+//   final VoidCallback setupCompleted;
 
-  @override
-  State<_WebSetupPage> createState() => _WebSetupPageState();
-}
+//   @override
+//   State<_WebSetupPage> createState() => _WebSetupPageState();
+// }
 
-class _WebSetupPageState extends State<_WebSetupPage> {
-  late TextEditingController _appIdController;
-  late TextEditingController _channelIdController;
-  late TextEditingController _tokenController;
+// class _WebSetupPageState extends State<_WebSetupPage> {
+//   late TextEditingController _appIdController;
+//   late TextEditingController _channelIdController;
+//   late TextEditingController _tokenController;
 
-  bool _isValid = false;
+//   bool _isValid = false;
 
-  late final ExampleConfigOverride _configOverride;
+//   late final ExampleConfigOverride _configOverride;
 
-  @override
-  void initState() {
-    super.initState();
+//   @override
+//   void initState() {
+//     super.initState();
 
-    _configOverride = ExampleConfigOverride();
+//     _configOverride = ExampleConfigOverride();
 
-    _appIdController = TextEditingController(text: _configOverride.getAppId());
-    _channelIdController =
-        TextEditingController(text: _configOverride.getChannelId());
-    _tokenController = TextEditingController(text: _configOverride.getToken());
+//     _appIdController = TextEditingController(text: _configOverride.getAppId());
+//     _channelIdController =
+//         TextEditingController(text: _configOverride.getChannelId());
+//     _tokenController = TextEditingController(text: _configOverride.getToken());
 
-    _appIdController.addListener(_validCheck);
-    _channelIdController.addListener(_validCheck);
-  }
+//     _appIdController.addListener(_validCheck);
+//     _channelIdController.addListener(_validCheck);
+//   }
 
-  void _validCheck() {
-    _isValid = _appIdController.text.isNotEmpty &&
-        _channelIdController.text.isNotEmpty;
-    setState(() {});
-  }
+//   void _validCheck() {
+//     _isValid = _appIdController.text.isNotEmpty &&
+//         _channelIdController.text.isNotEmpty;
+//     setState(() {});
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: 300,
-        child: Column(
-          children: [
-            const Text('Input Your APP ID'),
-            TextField(
-              controller: _appIdController,
-              decoration: const InputDecoration(
-                labelText: 'APP ID can not be empty',
-                // errorText: _appIdValidate ? "Value Can't Be Empty" : null,
-              ),
-            ),
-            const Text('Input Your Channel ID'),
-            TextField(
-              controller: _channelIdController,
-              decoration: const InputDecoration(
-                labelText: 'Channel ID can not be empty',
-                // errorText: _appIdValidate ? "Value Can't Be Empty" : null,
-              ),
-            ),
-            const Text('Input Your Token (Optional)'),
-            TextField(
-              controller: _tokenController,
-            ),
-            ElevatedButton(
-              onPressed: !_isValid
-                  ? null
-                  : () {
-                      _configOverride.set(keyAppId, _appIdController.text);
-                      _configOverride.set(
-                          keyChannelId, _channelIdController.text);
-                      _configOverride.set(keyToken, _tokenController.text);
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: SizedBox(
+//         width: 300,
+//         child: Column(
+//           children: [
+//             const Text('Input Your APP ID'),
+//             TextField(
+//               controller: _appIdController,
+//               decoration: const InputDecoration(
+//                 labelText: 'APP ID can not be empty',
+//                 // errorText: _appIdValidate ? "Value Can't Be Empty" : null,
+//               ),
+//             ),
+//             const Text('Input Your Channel ID'),
+//             TextField(
+//               controller: _channelIdController,
+//               decoration: const InputDecoration(
+//                 labelText: 'Channel ID can not be empty',
+//                 // errorText: _appIdValidate ? "Value Can't Be Empty" : null,
+//               ),
+//             ),
+//             const Text('Input Your Token (Optional)'),
+//             TextField(
+//               controller: _tokenController,
+//             ),
+//             ElevatedButton(
+//               onPressed: !_isValid
+//                   ? null
+//                   : () {
+//                       _configOverride.set(keyAppId, _appIdController.text);
+//                       _configOverride.set(
+//                           keyChannelId, _channelIdController.text);
+//                       _configOverride.set(keyToken, _tokenController.text);
 
-                      widget.setupCompleted();
-                    },
-              child: const Text('Done'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+//                       widget.setupCompleted();
+//                     },
+//               child: const Text('Done'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
 
-  @override
-  void dispose() {
-    _appIdController.dispose();
-    _channelIdController.dispose();
-    _tokenController.dispose();
-    super.dispose();
-  }
-}
+//   @override
+//   void dispose() {
+//     _appIdController.dispose();
+//     _channelIdController.dispose();
+//     _tokenController.dispose();
+//     super.dispose();
+//   }
+// }
 
-/// This widget is used to indicate the configuration is invalid
-class InvalidConfigWidget extends StatelessWidget {
-  /// Construct the [InvalidConfigWidget]
-  const InvalidConfigWidget({Key? key}) : super(key: key);
+// /// This widget is used to indicate the configuration is invalid
+// class InvalidConfigWidget extends StatelessWidget {
+//   /// Construct the [InvalidConfigWidget]
+//   const InvalidConfigWidget({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      child: const Text(
-          'Make sure you set the correct appId, token, channelId, etc.. in the lib/config/agora.config.dart file.'),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       color: Colors.red,
+//       child: const Text(
+//           'Make sure you set the correct appId, token, channelId, etc.. in the lib/config/agora.config.dart file.'),
+//     );
+//   }
+// }

@@ -75,7 +75,7 @@
     },
     {
       "name": "agora_rtc_engine",
-      "version": "6.5.2",
+      "version": "6.5.4",
       "dependencies": [
         "async",
         "ffi",
@@ -84,7 +84,8 @@
         "iris_method_channel",
         "js",
         "json_annotation",
-        "meta"
+        "meta",
+        "web"
       ]
     },
     {
@@ -278,13 +279,20 @@
       ]
     },
     {
-      "name": "js",
-      "version": "0.7.2",
+      "name": "web",
+      "version": "1.1.1",
       "dependencies": []
     },
     {
+      "name": "js",
+      "version": "0.6.7",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
       "name": "iris_method_channel",
-      "version": "2.2.4",
+      "version": "2.2.5",
       "dependencies": [
         "async",
         "ffi",
@@ -405,11 +413,6 @@
         "meta",
         "path"
       ]
-    },
-    {
-      "name": "web",
-      "version": "1.1.1",
-      "dependencies": []
     },
     {
       "name": "vm_service",
